@@ -10,6 +10,18 @@ if (typeof window === 'undefined'){
  * and two white pieces at [3, 3] and [4, 4].
  */
 function _makeGrid() {
+  const rows = 8;
+  const columns = 8;
+
+  let matrix = Array(rows).fill().map(() => 
+    Array(columns).fill(undefined));
+
+  matrix[3][4] = new Piece('black');
+  matrix[4][3] = new Piece('black');
+  matrix[3][3] = new Piece('white');
+  matrix[4][4] = new Piece('white');
+  
+  return matrix;
 }
 
 /**
@@ -29,6 +41,15 @@ Board.DIRS = [
  * Checks if a given position is on the Board.
  */
 Board.prototype.isValidPos = function (pos) {
+  let x = pos[0];
+  let y = pos[1];
+
+  if (x < 0 || y < 0) {
+    return false;
+  } else if (x > 7 || y > 7) {
+    return false; 
+  }
+  return true;
 };
 
 /**
